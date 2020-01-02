@@ -35,10 +35,10 @@ class Account(AbstractBaseUser):
     STUDY_LEVEL_CHOICES = [
         (100, '100 Level'),
         (200, '200 Level'),
-        (300, '300 Level'),
-        (400, '400 Level'),
-        (500, '500 Level'),
-        (600, '600 Level'),
+        # (300, '300 Level'),
+        # (400, '400 Level'),
+        # (500, '500 Level'),
+        # (600, '600 Level'),
     ]
     ACADEMIC_SESSION_CHOICES = [
         ('first semester', 'first semester'),
