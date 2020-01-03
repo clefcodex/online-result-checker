@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from .forms import RegistrationForm, AccountAuthenticationForm
+from .forms import RegistrationForm, AccountAuthenticationForm, ComplainForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -15,8 +15,19 @@ def index(request):
 
 @login_required
 def result(request):
+	if request.method == "POST":
+		form = ComplainForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect("result")
+		else:
+			print(form.error_messages)
+			form = ComplainForm(request.POST)
+	else:
+		form = ComplainForm()
+
 	context = {
-	
+		'form': form
 	}
 	return render(request, 'result.html', context)
 
@@ -26,9 +37,9 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
+            matric_number = form.cleaned_data.get('matric_number')
             raw_password = form.cleaned_data.get('password1')
-            account = authenticate(username=username, password=raw_password)
+            account = authenticate(matric_number=matric_number, password=raw_password)
             login(request, account)
 
             return redirect("result")
@@ -57,9 +68,9 @@ def login_view(request):
 	if request.POST:
 		form = AccountAuthenticationForm(request.POST)
 		if form.is_valid():
-			username = request.POST['username']
+			matric_number = request.POST['matric_number']
 			password = request.POST['password']
-			user = authenticate(username=username, password=password)
+			user = authenticate(matric_number=matric_number, password=password)
 
 			if user:
 				login(request, user)

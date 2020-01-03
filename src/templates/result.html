@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -22,6 +23,12 @@
       #ourResult{
         visibility: hidden;
       }
+
+      #complainBox{
+        visibility: hidden;
+      }
+
+
       table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
@@ -37,6 +44,10 @@
 
       tr:nth-child(even) {
         background-color: #dddddd;
+      }
+
+      .complain-text {
+        font-size: 1.2rem;
       }
     </style>
 
@@ -195,8 +206,26 @@
           </tbody>
         </table>
       </div>
-    </div>
-    
+
+      <br><br>
+      <div id="complainBox">    
+        <h1 class="text-center mt-0 mb-3"><span class="text-center m-t-4 badge badge-secondary">Complain Box</span></h1>
+        <p class="text-center text-white mt-0 mb-3 complain-text">Enter your username, matric number and your complain.</p>
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <form method="post" novalidate>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Send Complain</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
 
     <p id="content">
       <script>
@@ -205,8 +234,7 @@
       </script>
     </p>
 
-    <button id="total">Total</button>
-
+   
               
        
 
@@ -434,6 +462,8 @@
       function myFunction() {
         let ourResult = document.getElementById("ourResult");
           ourResult.style.visibility = "visible";
+          let complainBox = document.getElementById("complainBox");
+          complainBox.style.visibility = "visible";
       }
 
 

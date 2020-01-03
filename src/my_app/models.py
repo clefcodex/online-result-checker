@@ -3,14 +3,14 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, email, username, password=None):
+    def create_user(self, email, matric_number, password=None):
         if not email:
             raise ValueError("User must have an email address")
-        if not username:
-            raise ValueError("User must have a username")
+        if not matric_number:
+            raise ValueError("User must have a matric number")
         user = self.model(
             email=self.normalize_email(email),
-            username=username,
+            matric_number=matric_number,
         )
 
         user.set_password(password)
@@ -33,12 +33,8 @@ class MyAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser):
     STUDY_LEVEL_CHOICES = [
-        (100, '100 Level'),
-        (200, '200 Level'),
-        # (300, '300 Level'),
-        # (400, '400 Level'),
-        # (500, '500 Level'),
-        # (600, '600 Level'),
+        (100, 'OND'),
+        (200, 'HND'),
     ]
     ACADEMIC_SESSION_CHOICES = [
         ('first semester', 'first semester'),
@@ -53,7 +49,7 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    matric_number = models.CharField(max_length=60)
+    matric_number = models.CharField(max_length=60, unique=True)
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
     department = models.CharField(max_length=60)
@@ -61,14 +57,14 @@ class Account(AbstractBaseUser):
     academic_session = models.CharField(
         choices=ACADEMIC_SESSION_CHOICES, max_length=30, default='first semester')
 
-    USERNAME_FIELD = 'username'  # specify which field u want the user to use to login
+    USERNAME_FIELD = 'matric_number'  # specify which field u want the user to use to login
     REQUIRED_FIELDS = ['email']
     
 
     objects = MyAccountManager()
 
     def __str__(self):
-        return self.username
+        return self.matric_number
 
     # The following methods are compulsory
 
@@ -77,3 +73,11 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+
+
+class Complain(models.Model):
+    description = models.TextField(blank=True)
+
+

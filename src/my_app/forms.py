@@ -1,11 +1,11 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
-from .models import Account
+from .models import Account, Complain
 
 
 class RegistrationForm(UserCreationForm):
-    username = forms.CharField(max_length=30)
+    matric_number = forms.CharField(max_length=30)
 
     class Meta:
         model = Account
@@ -19,10 +19,17 @@ class AccountAuthenticationForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = ('username', 'password')
+        fields = ('matric_number', 'password')
 
     def clean(self):
-        username = self.cleaned_data['username']
+        matric_number = self.cleaned_data['matric_number']
         password = self.cleaned_data['password']
-        if not authenticate(username=username, password=password):
+        if not authenticate(matric_number=matric_number, password=password):
             raise forms.ValidationError("Invalid login")
+
+
+class ComplainForm(forms.ModelForm):
+
+    class Meta:
+        model = Complain
+        fields = ('description',)
