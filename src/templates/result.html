@@ -66,7 +66,8 @@
             <ul class="navbar-nav mr-auto">               
             </ul>
             {% if user.is_authenticated %}  
-              <button class="btn btn-success my-2 my-sm-0 mt-5 mr-2"> You are log in as {{ user.username }}</button>
+              <button class="btn btn-success my-2 my-sm-0 mt-5 mr-2"> You are logged in as {{ user.username }}</button>
+              
             {% endif %}
             <button class="btn btn-outline-success my-2 my-sm-0 mt-5 mr-2" id="checkResult">Check Result</button>
             <a href="{% url 'logout' %}" class="btn btn-success my-2 my-sm-0 mt-5">logout</a>
@@ -208,7 +209,7 @@
       </div>
 
       <br><br>
-      <div id="complainBox">    
+      <div id="complainBox">  
         <h1 class="text-center mt-0 mb-3"><span class="text-center m-t-4 badge badge-secondary">Complain Box</span></h1>
         <p class="text-center text-white mt-0 mb-3 complain-text">Enter your username, matric number and your complain.</p>
         <div class="row justify-content-center">

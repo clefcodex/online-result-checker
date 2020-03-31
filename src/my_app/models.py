@@ -33,13 +33,21 @@ class MyAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser):
     STUDY_LEVEL_CHOICES = [
-        (100, 'OND'),
-        (200, 'HND'),
+        (100, 'ND 1'),
+        (200, 'ND 2'),
     ]
     ACADEMIC_SESSION_CHOICES = [
-        ('first semester', 'first semester'),
-        ('second semester', 'second semester'),
+        ('first semester', 'First Semester'),
+        ('second semester', 'Second Semester'),
     ]
+
+    DEPARTMENT_CHOICES = [
+        ('Accountancy', 'Accountancy'),
+        ('Business Admin', 'Business Admin'),
+        ('Computer Science', 'Computer Science'),
+        ('Statistics', 'Statistics'),
+    ]
+
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username = models.CharField(max_length=30, unique=True)
     date_joined = models.DateTimeField(
@@ -52,7 +60,7 @@ class Account(AbstractBaseUser):
     matric_number = models.CharField(max_length=60, unique=True)
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
-    department = models.CharField(max_length=60)
+    department = models.CharField(max_length=60, choices=DEPARTMENT_CHOICES, default='Accountancy')
     study_level = models.IntegerField(choices=STUDY_LEVEL_CHOICES, default=100)
     academic_session = models.CharField(
         choices=ACADEMIC_SESSION_CHOICES, max_length=30, default='first semester')
@@ -64,7 +72,7 @@ class Account(AbstractBaseUser):
     objects = MyAccountManager()
 
     def __str__(self):
-        return self.matric_number
+        return f'{self.first_name} {self.last_name} Matric Number: {self.matric_number}'
 
     # The following methods are compulsory
 
@@ -79,5 +87,9 @@ class Account(AbstractBaseUser):
 
 class Complain(models.Model):
     description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.description[:15]
+
 
 
