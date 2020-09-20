@@ -21,13 +21,12 @@
       }
 
       #ourResult{
-        visibility: hidden;
+        display: none;
       }
 
       #complainBox{
-        visibility: hidden;
+        display: none;
       }
-
 
       table {
         font-family: arial, sans-serif;
@@ -40,6 +39,7 @@
         border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
+        font-size: 1.2rem;
       }
 
       tr:nth-child(even) {
@@ -77,135 +77,136 @@
     <div class="container">
       <h1 class="text-center mt-0 mb-3"><span class="text-center m-t-4 badge badge-secondary">Your Result Here</span></h1>
     </div>
-    
     <div class="container">
-      <div class="row">
-        <table id="ourResult">
-          <thead>
-            <tr>
-              <th>Course Code</th>
-              <th>Subject Title</th>
-              <th>Credit Units</th>
-              <th>Score</th>
-              <th>Grade</th>
-              <th>Point</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>STA 111</td>
-              <td>Descriptive Statistics I</td>
-              <td>2</td>
-              <td id="sta111"></td>
-              <td id="sta111G"></td>
-              <td id="sta111P"></td>
-            </tr>
-            <tr>
-              <td>STA 112</td>
-              <td>Elementary Probability Theory</td>
-              <td>2</td>
-              <td id="sta112"></td>
-              <td id="sta112G"></td>
-              <td id="sta112P"></td>
-            </tr>
-            <tr>
-              <td>MTH 111</td>
-              <td>Logic and Linear Algebra</td>
-              <td>2</td>
-              <td id="mth111"></td>
-              <td id="mth111G"></td>
-              <td id="mth111P"></td>
-            </tr>
-            <tr>
-              <td>MTH 112</td>
-              <td>Trig, Geometry and Function</td>
-              <td>2</td>
-              <td id="mth112"></td>
-              <td id="mth112G"></td>
-              <td id="mth112P"></td>
-            </tr>
-            <tr>
-              <td>COM 111</td>
-              <td>Visual Basic Language</td>
-              <td>2</td>
-              <td id="com111"></td>
-              <td id="com111G"></td>
-              <td id="com111P"></td>
-            </tr>
-            <tr>
-              <td>COM 112</td>
-              <td>Algorithm and Data Structure</td>
-              <td>2</td>
-              <td id="com112"></td>
-              <td id="com112G"></td>
-              <td id="com112P"></td>
-            </tr>
-            <tr>
-              <td>ECO 111</td>
-              <td>Economics I</td>
-              <td>2</td>
-              <td id="eco111"></td>
-              <td id="eco111G"></td>
-              <td id="eco111P"></td>
-            </tr>
-            <tr>
-              <td>GEO 111</td>
-              <td>Geography I</td>
-              <td>2</td>
-              <td id="geo111"></td>
-              <td id="geo111G"></td>
-              <td id="geo111P"></td>
-            </tr>
-            <tr>
-              <td>GNS 101</td>
-              <td>Use of English Language</td>
-              <td>2</td>
-              <td id="gns101"></td>
-              <td id="gns101G"></td>
-              <td id="gns101P"></td>
-            </tr>
-            <tr>
-              <td>GS 111</td>
-              <td>Physical and Health Education</td>
-              <td>2</td>
-              <td id="gs111"></td>
-              <td id="gs111G"></td>
-              <td id="gs111P"></td>
-            </tr>
-            <tr>
-              <td>BUS 111</td>
-              <td>Introduction to Accounting</td>
-              <td>2</td>
-              <td id="bus111"></td>
-              <td id="bus111G"></td>
-              <td id="bus111P"></td>
-            </tr>
-            <tr>
-              <td>FRH 111</td>
-              <td>Communication in French Lang. I</td>
-              <td>2</td>
-              <td id="frh111"></td>
-              <td id="frh111G"></td>
-              <td id="frh111P"></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>Total</td>
-              <td id="totalCredit">24</td>
-              <td></td>
-              <td></td>
-              <td id="totalP"></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>GPA</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td id="gpa"></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row justify-content-center">
+        <div class="col-md-9">
+          <table id="ourResult">
+            <thead>
+              <tr>
+                <th>Course Code</th>
+                <th>Subject Title</th>
+                <th>Credit Units</th>
+                <th>Score</th>
+                <th>Grade</th>
+                <th>Point</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>STA 111</td>
+                <td>Descriptive Statistics I</td>
+                <td>2</td>
+                <td id="sta111"></td>
+                <td id="sta111G"></td>
+                <td id="sta111P"></td>
+              </tr>
+              <tr>
+                <td>STA 112</td>
+                <td>Elementary Probability Theory</td>
+                <td>2</td>
+                <td id="sta112"></td>
+                <td id="sta112G"></td>
+                <td id="sta112P"></td>
+              </tr>
+              <tr>
+                <td>MTH 111</td>
+                <td>Logic and Linear Algebra</td>
+                <td>2</td>
+                <td id="mth111"></td>
+                <td id="mth111G"></td>
+                <td id="mth111P"></td>
+              </tr>
+              <tr>
+                <td>MTH 112</td>
+                <td>Trig, Geometry and Function</td>
+                <td>2</td>
+                <td id="mth112"></td>
+                <td id="mth112G"></td>
+                <td id="mth112P"></td>
+              </tr>
+              <tr>
+                <td>COM 111</td>
+                <td>Visual Basic Language</td>
+                <td>2</td>
+                <td id="com111"></td>
+                <td id="com111G"></td>
+                <td id="com111P"></td>
+              </tr>
+              <tr>
+                <td>COM 112</td>
+                <td>Algorithm and Data Structure</td>
+                <td>2</td>
+                <td id="com112"></td>
+                <td id="com112G"></td>
+                <td id="com112P"></td>
+              </tr>
+              <tr>
+                <td>ECO 111</td>
+                <td>Economics I</td>
+                <td>2</td>
+                <td id="eco111"></td>
+                <td id="eco111G"></td>
+                <td id="eco111P"></td>
+              </tr>
+              <tr>
+                <td>GEO 111</td>
+                <td>Geography I</td>
+                <td>2</td>
+                <td id="geo111"></td>
+                <td id="geo111G"></td>
+                <td id="geo111P"></td>
+              </tr>
+              <tr>
+                <td>GNS 101</td>
+                <td>Use of English Language</td>
+                <td>2</td>
+                <td id="gns101"></td>
+                <td id="gns101G"></td>
+                <td id="gns101P"></td>
+              </tr>
+              <tr>
+                <td>GS 111</td>
+                <td>Physical and Health Education</td>
+                <td>2</td>
+                <td id="gs111"></td>
+                <td id="gs111G"></td>
+                <td id="gs111P"></td>
+              </tr>
+              <tr>
+                <td>BUS 111</td>
+                <td>Introduction to Accounting</td>
+                <td>2</td>
+                <td id="bus111"></td>
+                <td id="bus111G"></td>
+                <td id="bus111P"></td>
+              </tr>
+              <tr>
+                <td>FRH 111</td>
+                <td>Communication in French Lang. I</td>
+                <td>2</td>
+                <td id="frh111"></td>
+                <td id="frh111G"></td>
+                <td id="frh111P"></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Total</td>
+                <td id="totalCredit">24</td>
+                <td></td>
+                <td></td>
+                <td id="totalP"></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>GPA</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td id="gpa"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <br><br>
@@ -462,9 +463,9 @@
 
       function myFunction() {
         let ourResult = document.getElementById("ourResult");
-          ourResult.style.visibility = "visible";
+          ourResult.style.display = "block";
           let complainBox = document.getElementById("complainBox");
-          complainBox.style.visibility = "visible";
+          complainBox.style.display = "block";
       }
 
 
