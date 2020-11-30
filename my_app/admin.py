@@ -10,6 +10,7 @@ class AccountAdmin(UserAdmin):
 	fieldsets = ()
 
 
-admin.site.register(Account, AccountAdmin)
+# admin.site.register(Account, AccountAdmin)
+admin.site.register(Account)
 admin.site.register(Complain)
 admin.site.register(Course)
