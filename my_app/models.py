@@ -2,6 +2,20 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
+class Course(models.Model):
+    CourseCode = models.CharField(max_length=60)
+    subjectTitle = models.CharField(max_length=255)
+    creditUnits = models.IntegerField()
+    score = models.IntegerField()
+    grade = models.CharField(max_length=1)
+    point = models.FloatField()
+     
+
+    def __str__(self):
+        return f'{self.CourseCode} - {self.subjectTitle} - {self.creditUnits}'
+
+
+
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, matric_number, password=None):
         if not email:
@@ -64,6 +78,7 @@ class Account(AbstractBaseUser):
     study_level = models.IntegerField(choices=STUDY_LEVEL_CHOICES, default=100)
     academic_session = models.CharField(
         choices=ACADEMIC_SESSION_CHOICES, max_length=30, default='first semester')
+    courses = models.ManyToManyField(Course)
 
     USERNAME_FIELD = 'matric_number'  # specify which field u want the user to use to login
     REQUIRED_FIELDS = ['email']

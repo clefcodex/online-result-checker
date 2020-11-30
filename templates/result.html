@@ -69,13 +69,19 @@
               <button class="btn btn-success my-2 my-sm-0 mt-5 mr-2"> You are logged in as {{ user.username }}</button>
               
             {% endif %}
-            <button class="btn btn-outline-success my-2 my-sm-0 mt-5 mr-2" id="checkResult">Check Result</button>
+            {% if user.username != 'admin' %}
+              <button class="btn btn-outline-success my-2 my-sm-0 mt-5 mr-2" id="checkResult">Check Result</button>
+            {% endif %}
             <a href="{% url 'logout' %}" class="btn btn-success my-2 my-sm-0 mt-5">logout</a>
           </div>
         </nav> 
       </div>
     <div class="container">
-      <h1 class="text-center mt-0 mb-3"><span class="text-center m-t-4 badge badge-secondary">Your Result Here</span></h1>
+      {% if user.username != 'admin' %}
+        <h1 class="text-center mt-0 mb-3"><span class="text-center m-t-4 badge badge-secondary">Your Result Here {{ user }} </span></h1>
+      {% else %}
+        <h1 class="text-center mt-0 mb-3"><span class="text-center m-t-4 badge badge-secondary"> Admin Page </span></h1>       
+      {% endif %}      
     </div>
     <div class="container">
       <div class="row justify-content-center">
@@ -92,106 +98,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>STA 111</td>
-                <td>Descriptive Statistics I</td>
-                <td>2</td>
-                <td id="sta111"></td>
-                <td id="sta111G"></td>
-                <td id="sta111P"></td>
-              </tr>
-              <tr>
-                <td>STA 112</td>
-                <td>Elementary Probability Theory</td>
-                <td>2</td>
-                <td id="sta112"></td>
-                <td id="sta112G"></td>
-                <td id="sta112P"></td>
-              </tr>
-              <tr>
-                <td>MTH 111</td>
-                <td>Logic and Linear Algebra</td>
-                <td>2</td>
-                <td id="mth111"></td>
-                <td id="mth111G"></td>
-                <td id="mth111P"></td>
-              </tr>
-              <tr>
-                <td>MTH 112</td>
-                <td>Trig, Geometry and Function</td>
-                <td>2</td>
-                <td id="mth112"></td>
-                <td id="mth112G"></td>
-                <td id="mth112P"></td>
-              </tr>
-              <tr>
-                <td>COM 111</td>
-                <td>Visual Basic Language</td>
-                <td>2</td>
-                <td id="com111"></td>
-                <td id="com111G"></td>
-                <td id="com111P"></td>
-              </tr>
-              <tr>
-                <td>COM 112</td>
-                <td>Algorithm and Data Structure</td>
-                <td>2</td>
-                <td id="com112"></td>
-                <td id="com112G"></td>
-                <td id="com112P"></td>
-              </tr>
-              <tr>
-                <td>ECO 111</td>
-                <td>Economics I</td>
-                <td>2</td>
-                <td id="eco111"></td>
-                <td id="eco111G"></td>
-                <td id="eco111P"></td>
-              </tr>
-              <tr>
-                <td>GEO 111</td>
-                <td>Geography I</td>
-                <td>2</td>
-                <td id="geo111"></td>
-                <td id="geo111G"></td>
-                <td id="geo111P"></td>
-              </tr>
-              <tr>
-                <td>GNS 101</td>
-                <td>Use of English Language</td>
-                <td>2</td>
-                <td id="gns101"></td>
-                <td id="gns101G"></td>
-                <td id="gns101P"></td>
-              </tr>
-              <tr>
-                <td>GS 111</td>
-                <td>Physical and Health Education</td>
-                <td>2</td>
-                <td id="gs111"></td>
-                <td id="gs111G"></td>
-                <td id="gs111P"></td>
-              </tr>
-              <tr>
-                <td>BUS 111</td>
-                <td>Introduction to Accounting</td>
-                <td>2</td>
-                <td id="bus111"></td>
-                <td id="bus111G"></td>
-                <td id="bus111P"></td>
-              </tr>
-              <tr>
-                <td>FRH 111</td>
-                <td>Communication in French Lang. I</td>
-                <td>2</td>
-                <td id="frh111"></td>
-                <td id="frh111G"></td>
-                <td id="frh111P"></td>
-              </tr>
+              
+              {% for course in courses %}
+                <tr>
+                  <td>{{ course.CourseCode }}</td>
+                  <td>{{ course.subjectTitle }}</td>
+                  <td class="creditUnit">{{ course.creditUnits }}</td>
+                  <td>{{ course.score }}</td>
+                  <td>{{ course.grade }}</td>
+                  <td class="point">{{ course.point }}</td>
+                </tr>
+              {% endfor %}
               <tr>
                 <td></td>
                 <td>Total</td>
-                <td id="totalCredit">24</td>
+                <td id="totalC">24</td>
                 <td></td>
                 <td></td>
                 <td id="totalP"></td>
@@ -241,231 +162,41 @@
        
 
     <script>
-      // Scores for each course
-      const sta111 = document.getElementById('sta111');
-      sta111.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-      const sta112 = document.getElementById('sta112');
-      sta112.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-      const mth111 = document.getElementById('mth111');
-      mth111.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-      const mth112 = document.getElementById('mth112');
-      mth112.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-      const com111 = document.getElementById('com111');
-      com111.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-      const com112 = document.getElementById('com112');
-      com112.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-      const eco111 = document.getElementById('eco111');
-      eco111.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-      const geo111 = document.getElementById('geo111');
-      geo111.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-      const gns101 = document.getElementById('gns101');
-      gns101.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-      const gs111 = document.getElementById('gs111');
-      gs111.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-      const bus111 = document.getElementById('bus111');
-      bus111.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-      const frh111 = document.getElementById('frh111');
-      frh111.innerHTML = Math.floor(Math.random() * (101 - 11) ) + 11;
-
-
-
-      // Grade for each Course
-      const sta111G = document.getElementById('sta111G');
-      sta111G.innerHTML = getGrade( parseInt(sta111.innerHTML) );
-
-      const sta112G = document.getElementById('sta112G');
-      sta112G.innerHTML = getGrade( parseInt(sta112.innerHTML) );
+      // Getting Total Credits
+      const credits = document.querySelectorAll('.creditUnit');
+      let totalCredits = 0;
+      for(let i = 0; i < credits.length; i++) {
+        totalCredits += parseFloat(credits[i].textContent);
+      }
       
-      const mth111G = document.getElementById('mth111G');
-      mth111G.innerHTML = getGrade( parseInt(mth111.innerHTML) );
+      const totalC = document.getElementById('totalC');
+      totalC.textContent = totalCredits;
 
-      const mth112G = document.getElementById('mth112G');
-      mth112G.innerHTML = getGrade( parseInt(mth112.innerHTML) );
 
-      const com111G = document.getElementById('com111G');
-      com111G.innerHTML = getGrade( parseInt(com111.innerHTML) );
-
-      const com112G = document.getElementById('com112G');
-      com112G.innerHTML = getGrade( parseInt(com112.innerHTML) );
-
-      const eco111G = document.getElementById('eco111G');
-      eco111G.innerHTML = getGrade( parseInt(eco111.innerHTML) );
-
-      const geo111G = document.getElementById('geo111G');
-      geo111G.innerHTML = getGrade( parseInt(geo111.innerHTML) );
-
-      const gns101G = document.getElementById('gns101G');
-      gns101G.innerHTML = getGrade( parseInt(gns101.innerHTML) );
-
-      const gs111G = document.getElementById('gs111G');
-      gs111G.innerHTML = getGrade( parseInt(gs111.innerHTML) );
-
-      const bus111G = document.getElementById('bus111G');
-      bus111G.innerHTML = getGrade( parseInt(bus111.innerHTML) );
-
-      const frh111G = document.getElementById('frh111G');
-      frh111G.innerHTML = getGrade( parseInt(frh111.innerHTML) );
-
-      function getGrade(score) {
-        if (score >= 75) {
-          return 'A';
-        }  
-
-        else if (score >= 70 & score < 75) {
-          return 'AB';
-        }
-
-        else if (score >= 65 & score < 70) {
-          return 'B';
-        }
-
-        else if (score >= 60 & score < 65) {
-          return 'BC';
-        }
-
-        else if (score >= 55 & score < 60) {
-          return 'C';
-        }
-
-        else if (score >= 50 & score < 55) {
-          return 'CD';
-        }
-
-        else if (score >= 45 & score < 50) {
-          return 'D';
-        }
-
-        else if (score >= 40 & score < 45) {
-          return 'E';
-        }
-
-        else {
-          return 'F';
-        }
+      // Getting Total Points
+      const points = document.querySelectorAll('.point');
+      let totalPoints = 0;
+      for(let i = 0; i < points.length; i++) {
+        totalPoints += parseFloat(points[i].textContent);
       }
-
-      // Point for each course
-
-      const sta111P = document.getElementById('sta111P');
-      sta111P.innerHTML = getPoint(sta111G.innerHTML);
-
-      const sta112P = document.getElementById('sta112P');
-      sta112P.innerHTML = getPoint(sta112G.innerHTML);
-
-      const mth111P = document.getElementById('mth111P');
-      mth111P.innerHTML = getPoint(mth111G.innerHTML);
-
-      const mth112P = document.getElementById('mth112P');
-      mth112P.innerHTML = getPoint(mth112G.innerHTML);
-
-      const com111P = document.getElementById('com111P');
-      com111P.innerHTML = getPoint(com111G.innerHTML);
-
-      const com112P = document.getElementById('com112P');
-      com112P.innerHTML = getPoint(com112G.innerHTML);
-
-      const eco111P = document.getElementById('eco111P');
-      eco111P.innerHTML = getPoint(eco111G.innerHTML);
-
-      const geo111P = document.getElementById('geo111P');
-      geo111P.innerHTML = getPoint(geo111G.innerHTML);
-
-      const gns101P = document.getElementById('gns101P');
-      gns101P.innerHTML = getPoint(gns101G.innerHTML);
-
-      const gs111P = document.getElementById('gs111P');
-      gs111P.innerHTML = getPoint(gs111G.innerHTML);
-
-      const bus111P = document.getElementById('bus111P');
-      bus111P.innerHTML = getPoint(bus111G.innerHTML);
-
-      const frh111P = document.getElementById('frh111P');
-      frh111P.innerHTML = getPoint(frh111G.innerHTML);
-
-
-      function getPoint(grade) {
-        if (grade == 'A') {
-          return 4.00*2;
-        }
-
-        else if (grade == 'AB') {
-          return 3.50*2;
-        }
-
-        else if (grade == 'B') {
-          return 3.25*2;
-        }
-
-        else if (grade == 'BC') {
-          return 3.00*2;
-        }
-
-        else if (grade == 'C') {
-          return 2.75*2;
-        }
-
-        else if (grade == 'CD') {
-          return 2.50*2;
-        }
-
-        else if (grade == 'D') {
-          return 2.25*2;
-        }
-
-        else if (grade == 'E') {
-          return 2.00*2;
-        }
-
-        else if (grade == 'F') {
-          return 0.00*2;
-        }
-      }
-
 
       const totalP = document.getElementById('totalP');
-      totalP.innerHTML = (
-        parseFloat(sta111P.innerHTML) + parseFloat(sta112P.innerHTML) + 
-        parseFloat(mth111P.innerHTML) + parseFloat(mth112P.innerHTML) + 
-        parseFloat(com111P.innerHTML) + parseFloat(com112P.innerHTML) + 
-        parseFloat(eco111P.innerHTML) + parseFloat(geo111P.innerHTML) + 
-        parseFloat(gns101P.innerHTML) + parseFloat(gs111P.innerHTML) + 
-        parseFloat(bus111P.innerHTML) + parseFloat(frh111P.innerHTML)
-        );
+      totalP.textContent = totalPoints;
+
+    
 
       const gpa = document.getElementById('gpa');
-      const totalCredit = parseFloat(document.getElementById('totalCredit').innerHTML);
-      gpa.innerHTML = (totalP.innerHTML / totalCredit).toFixed(2);
+
+      gpa.textContent = (totalPoints / totalCredits).toFixed(2);
       
       const checkResult = document.getElementById('checkResult');
       checkResult.addEventListener('click', myFunction);
 
       function myFunction() {
         let ourResult = document.getElementById("ourResult");
-          ourResult.style.display = "block";
-          let complainBox = document.getElementById("complainBox");
-          complainBox.style.display = "block";
+        ourResult.style.display = "block";
+        let complainBox = document.getElementById("complainBox");
+        complainBox.style.display = "block";
       }
 
 

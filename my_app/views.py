@@ -26,8 +26,12 @@ def result(request):
 	else:
 		form = ComplainForm()
 
+	courses = request.user.courses.all()
+	user = request.user
 	context = {
-		'form': form
+		'form': form,
+		'courses': courses,
+		'user': user,
 	}
 	return render(request, 'result.html', context)
 
